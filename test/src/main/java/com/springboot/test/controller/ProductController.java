@@ -1,5 +1,6 @@
 package com.springboot.test.controller;
 
+import com.springboot.test.aop.LogExecutionTime;
 import com.springboot.test.data.dto.ChangeProductNameDto;
 import com.springboot.test.data.dto.ProductDto;
 import com.springboot.test.data.dto.ProductResponseDto;
@@ -32,6 +33,7 @@ public class ProductController {
 
     // 예제 7.5
     @GetMapping()
+    @LogExecutionTime
     public ResponseEntity<ProductResponseDto> getProduct(Long number) {
 
         ProductResponseDto productResponseDto = productService.getProduct(number);
@@ -41,6 +43,7 @@ public class ProductController {
 
     // 예제 7.7
     @PostMapping()
+    @LogExecutionTime
     public ResponseEntity<ProductResponseDto> createProduct(@RequestBody ProductDto productDto) {
 
         ProductResponseDto productResponseDto = productService.saveProduct(productDto);
@@ -49,6 +52,7 @@ public class ProductController {
     }
 
     @PutMapping()
+    @LogExecutionTime
     public ResponseEntity<ProductResponseDto> changeProductName(
         @RequestBody ChangeProductNameDto changeProductNameDto) throws Exception {
 
@@ -61,6 +65,7 @@ public class ProductController {
     }
 
     @DeleteMapping()
+    @LogExecutionTime
     public ResponseEntity<String> deleteProduct(Long number) throws Exception {
         productService.deleteProduct(number);
 
