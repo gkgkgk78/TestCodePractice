@@ -55,8 +55,8 @@ class ProductControllerTest {
                 //perform 메서드의 결과 값으로 ResultActions 객체가 리턴이 된다.
                 //andExpect: 해당 기능을 통하여 결과값 검증을 수행 할 수 있다.
                 .andExpect(status().isOk())
-                .andExpect(jsonPath(
-                        "$.number").exists()) // json path의 depth가 깊어지면 .을 추가하여 탐색할 수 있음 (ex : $.productId.productIdName)
+                .andExpect(jsonPath("$.number").exists())
+                // json path의 depth가 깊어지면 .을 추가하여 탐색할 수 있음 (ex : $.productId.productIdName)
                 .andExpect(jsonPath("$.name").exists())
                 .andExpect(jsonPath("$.price").exists())
                 .andExpect(jsonPath("$.stock").exists())

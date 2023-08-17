@@ -41,12 +41,10 @@ public class ProductServiceLayerTest {
     private ProductServiceImpl1 productService1;
 
 
-    @BeforeEach
+    @BeforeEach//이렇게 하면 interface를 implement 하는 것에게 주입이 가능함
     //service 객체를 만들시에 이렇게 해서 mock으로 생성이된 repository 넣을수 있음
     public void setUpTest() {
-
         productService = new ProductServiceImpl(productRepository);
-
     }
 
     @DisplayName("제품 저장")
@@ -112,7 +110,7 @@ public class ProductServiceLayerTest {
 //        verify(productRepository).save(any());
 //
 //    }
-    
+
 
     @DisplayName("제품 읽기")
     @Test
@@ -162,11 +160,8 @@ public class ProductServiceLayerTest {
         //assertThrows(MembershipException.class, () -> target.accumulateMembershipPoint(membershipId, "notowner", 10000));
         BaseException baseException = assertThrows(BaseException.class, () -> productService.getProduct(124L));
 
-
         //then
         assertThat(baseException.getErrorMessage()).isEqualTo(ErrorMessage.NOT_EXIST_PHOTO.getErrMsg());
-
-
 
     }
 

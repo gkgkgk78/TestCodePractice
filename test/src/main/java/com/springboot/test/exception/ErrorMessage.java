@@ -15,10 +15,11 @@ public enum ErrorMessage {
     NOT_EXIST_ROUTE("존재하지 않는 경로입니다.", HttpStatus.BAD_REQUEST),
 
     ALREADY_EXIST_PRODUCT("이미 존재하는 사진 데이터입니다.", HttpStatus.BAD_REQUEST),
-    
+
     NOT_EXIST_PRODUCT("존재하지 않는 사진 데이터입니다.", HttpStatus.BAD_REQUEST),
+    NOT_EXIST_NUMBER("존재하지 않는 번호 입니다.", HttpStatus.BAD_REQUEST),
 
-
+    NOT_ALLOW_PARAMETER("저장시 허용되지 않은 값입니다", HttpStatus.BAD_REQUEST),
     NOT_EXIST_PHOTO("존재하지 않는 사진 입니다", HttpStatus.BAD_REQUEST);
 
 

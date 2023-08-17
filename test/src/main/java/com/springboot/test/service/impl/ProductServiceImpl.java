@@ -27,11 +27,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDto getProduct(Long number) {
         LOGGER.info("[getProduct] input number : {}", number);
-        Product product = productRepository.findById(number).orElseThrow(()->new BaseException(ErrorMessage.NOT_EXIST_PHOTO));
+        Product product = productRepository.findById(number).orElseThrow(() -> new BaseException(ErrorMessage.NOT_EXIST_PHOTO));
 
-        if (!number.equals(product.getNumber()))
-        {
-         throw new BaseException(ErrorMessage.NOT_EXIST_PHOTO);
+        if (!number.equals(product.getNumber())) {
+            throw new BaseException(ErrorMessage.NOT_EXIST_PHOTO);
         }
         LOGGER.info("[getProduct] product number : {}, name : {}", product.getNumber(),
                 product.getName());
@@ -49,6 +48,9 @@ public class ProductServiceImpl implements ProductService {
         LOGGER.info("[saveProduct] productDTO : {}", productDto.toString());
 
 
+        if (productDto.getPrice() < 0) {
+            throw new BaseException(ErrorMessage.NOT_ALLOW_PARAMETER);
+        }
 
 
         Product product = new Product();
@@ -70,7 +72,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto changeProductName(Long number, String name) {
-        Product foundProduct = productRepository.findById(number).get();
+
+        //Product product = productRepository.findById(number).orElseThrow(() -> new BaseException(ErrorMessage.NOT_EXIST_PHOTO));
+        Product foundProduct = productRepository.findById(number).orElseThrow(()->new BaseException(ErrorMessage.NOT_EXIST_NUMBER));
+
         foundProduct.setName(name);
         Product changedProduct = productRepository.save(foundProduct);
 
@@ -87,7 +92,6 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long number) {
         productRepository.deleteById(number);
     }
-
 
 
 }
